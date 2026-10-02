@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone 18 Pro Max 512 GB – Prisdashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#111a2e', accent: '#38bdf8' } } } }
+</script>
+<style>
+  body { background: #0b1220; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: #38bdf8; }
+  .arrow { font-size: 0.75em; margin-left: 0.25rem; }
+</style>
+</head>
+<body class="text-slate-100 min-h-screen">
+<div class="max-w-6xl mx-auto px-4 py-10">
+
+  <header class="mb-8">
+    <p class="text-sky-400 text-sm font-semibold tracking-wide uppercase">Prisbevakning · uppdaterad 2 oktober 2026</p>
+    <h1 class="text-4xl font-bold mt-2">iPhone 18 Pro Max <span class="text-sky-400">512 GB</span></h1>
+    <p class="text-slate-400 mt-2">Jämför priser hos svenska återförsäljare och operatörer. Klicka på en kolumnrubrik för att sortera.</p>
+  </header>
+
+  <!-- Best deal hero -->
+  <div class="bg-gradient-to-r from-sky-600 to-blue-700 rounded-2xl p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <p class="text-sky-100 text-sm uppercase tracking-wide font-semibold">Billigast just nu</p>
+      <p class="text-3xl font-bold mt-1">Tele2 – 20 160 kr</p>
+      <p class="text-sky-100 mt-1">Kampanj: spara 4 455 kr · Leverans 5–6 veckor</p>
+    </div>
+    <a href="https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24"
+       class="bg-white text-blue-800 font-semibold px-6 py-3 rounded-xl hover:bg-sky-100 transition">Till erbjudandet</a>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="kpiRow"></div>
+
+  <!-- Price table -->
+  <section class="bg-card rounded-2xl p-6 mb-8 border border-slate-800">
+    <h2 class="text-xl font-bold mb-4">Prisjämförelse 512 GB</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm" id="priceTable">
+        <thead>
+          <tr class="text-slate-400 border-b border-slate-700">
+            <th class="sortable py-3 pr-4" data-key="name">Butik / Operatör<span class="arrow" id="arrow-name"></span></th>
+            <th class="sortable py-3 pr-4" data-key="price">Pris (kr)<span class="arrow" id="arrow-price"></span></th>
+            <th class="sortable py-3 pr-4" data-key="savings">Besparing (kr)<span class="arrow" id="arrow-savings"></span></th>
+            <th class="py-3 pr-4">Kommentar</th>
+            <th class="py-3">Länk</th>
+          </tr>
+        </thead>
+        <tbody id="priceBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Subscription offers -->
+  <section class="bg-card rounded-2xl p-6 mb-8 border border-slate-800">
+    <h2 class="text-xl font-bold mb-4">Abonnemangserbjudanden</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-slate-400 border-b border-slate-700">
+            <th class="py-3 pr-4">Operatör</th>
+            <th class="py-3 pr-4">Erbjudande</th>
+            <th class="py-3 pr-4">Besparing</th>
+            <th class="py-3 pr-4">Villkor</th>
+            <th class="py-3">Länk</th>
+          </tr>
+        </thead>
+        <tbody id="subBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="text-slate-500 text-sm">
+    <p>Priser i SEK inkl. moms, observerade 2 oktober 2026. Ditt nuvarande avtal: Tre 799 kr/mån (sista delbetalningen i oktober).</p>
+  </footer>
+</div>
+
+<script>
+const prices = [
+  { name: "Tele2", price: 20160, savings: 4455, note: "Kampanj · leverans 5–6 veckor", url: "https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24", best: true },
+  { name: "Power", price: 21489, savings: 0, note: "Leverans omkring 23 okt", url: null },
+  { name: "Elgiganten", price: 21490, savings: 0, note: "I lager", url: null },
+  { name: "NetOnNet", price: 21490, savings: 0, note: "Förhandsbokning", url: null },
+  { name: "Telia", price: 21495, savings: 0, note: "Leverans 4–5 veckor", url: "https://www.telia.se/mobiltelefoner/apple/apple-iphone-18-pro-max" },
+  { name: "Apple Store", price: 21495, savings: 0, note: "Referenspris", url: "https://www.apple.com/se/shop/buy-iphone/iphone-18-pro" },
+  { name: "Tre", price: 22080, savings: 0, note: "460 kr/mån × 48 mån", url: "https://www.tre.se/handla/mobiltelefoner/apple/iphone-18-pro-max" },
+  { name: "CDON (marketplace)", price: 24722, savings: 0, note: "Säljs av CS MEGASTORE", url: null },
+  { name: "Telenor", price: null, savings: 0, note: "Endast med abonnemang", url: "https://www.telenor.se/handla/mobiler/apple/iphone-18-pro-max/" },
+  { name: "Webhallen", price: null, savings: 0, note: "512 GB slut i lager", url: null },
+];
+
+const subs = [
+  { op: "Tele2", offer: "Kampanjpris 20 160 kr", saving: "4 455 kr", terms: "Leverans 5–6 veckor", url: "https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24" },
+  { op: "Telia", offer: "Obegränsad + 24 mån bindning", saving: "ca 4 695 kr", terms: "Min totalkostnad ca 25 776 kr", url: "https://www.telia.se/mobiltelefoner/apple/apple-iphone-18-pro-max" },
+  { op: "Telenor", offer: "50 kr/mån rabatt × 24 mån", saving: "1 200 kr", terms: "24 mån bindning", url: "https://www.telenor.se/handla/mobiler/apple/iphone-18-pro-max/" },
+  { op: "Tre", offer: "30 kr/mån rabatt × 48 mån", saving: "1 440 kr", terms: "På abonnemanget", url: "https://www.tre.se/handla/mobiltelefoner/apple/iphone-18-pro-max" },
+];
+
+const fmt = n => n == null ? "–" : n.toLocaleString("sv-SE");
+
+let sortKey = "price", sortDir = 1;
+
+function renderPrices() {
+  const body = document.getElementById("priceBody");
+  const rows = [...prices].sort((a, b) => {
+    const av = a[sortKey] == null ? Infinity : a[sortKey];
+    const bv = b[sortKey] == null ? Infinity : b[sortKey];
+    if (typeof av === "string") return sortDir * av.localeCompare(bv, "sv");
+    return sortDir * (av - bv);
+  });
+  body.innerHTML = rows.map(r => `
+    <tr class="border-b border-slate-800 hover:bg-slate-800/40 ${r.best ? 'bg-sky-900/30' : ''}">
+      <td class="py-3 pr-4 font-semibold">${r.name}${r.best ? ' <span class="text-xs bg-sky-500 text-white px-2 py-0.5 rounded-full ml-1">BÄST</span>' : ''}</td>
+      <td class="py-3 pr-4 font-mono">${fmt(r.price)}</td>
+      <td class="py-3 pr-4 font-mono ${r.savings ? 'text-emerald-400 font-semibold' : 'text-slate-500'}">${r.savings ? fmt(r.savings) : "–"}</td>
+      <td class="py-3 pr-4 text-slate-400">${r.note}</td>
+      <td class="py-3">${r.url ? `<a href="${r.url}" class="text-sky-400 hover:underline">Öppna</a>` : '<span class="text-slate-600">–</span>'}</td>
+    </tr>`).join("");
+  ["name","price","savings"].forEach(k => {
+    document.getElementById("arrow-" + k).textContent = k === sortKey ? (sortDir === 1 ? "▲" : "▼") : "";
+  });
+}
+
+document.querySelectorAll("th.sortable").forEach(th => {
+  th.addEventListener("click", () => {
+    const k = th.dataset.key;
+    if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = 1; }
+    renderPrices();
+  });
+});
+
+document.getElementById("subBody").innerHTML = subs.map(s => `
+  <tr class="border-b border-slate-800 hover:bg-slate-800/40">
+    <td class="py-3 pr-4 font-semibold">${s.op}</td>
+    <td class="py-3 pr-4">${s.offer}</td>
+    <td class="py-3 pr-4 text-emerald-400 font-semibold">${s.saving}</td>
+    <td class="py-3 pr-4 text-slate-400">${s.terms}</td>
+    <td class="py-3"><a href="${s.url}" class="text-sky-400 hover:underline">Öppna</a></td>
+  </tr>`).join("");
+
+renderPrices();
+
+const withPrice = prices.filter(p => p.price != null);
+const minP = Math.min(...withPrice.map(p => p.price));
+const maxP = Math.max(...withPrice.map(p => p.price));
+const maxS = Math.max(...prices.map(p => p.savings));
+const kpis = [
+  ["Lägsta pris", fmt(minP) + " kr", "Tele2, kampanj"],
+  ["Största besparing", fmt(maxS) + " kr", "Tele2-kampanjen"],
+  ["Prisspridning", fmt(maxP - minP) + " kr", fmt(minP) + " – " + fmt(maxP) + " kr"],
+  ["Bevakade alternativ", String(prices.length), "butiker & operatörer"],
+];
+document.getElementById("kpiRow").innerHTML = kpis.map(k => `
+  <div class="bg-card rounded-2xl p-5 border border-slate-800">
+    <p class="text-slate-400 text-xs uppercase tracking-wide font-semibold">${k[0]}</p>
+    <p class="text-2xl font-bold mt-1 text-sky-300">${k[1]}</p>
+    <p class="text-slate-500 text-xs mt-1">${k[2]}</p>
+  </div>`).join("");
+</script>
+</body>
+</html>
