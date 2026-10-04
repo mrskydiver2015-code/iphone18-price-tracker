@@ -21,7 +21,7 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#111a2e'
   <header class="mb-8">
     <p class="text-sky-400 text-sm font-semibold tracking-wide uppercase">Prisbevakning · uppdaterad 2 oktober 2026</p>
     <h1 class="text-4xl font-bold mt-2">iPhone 18 Pro Max <span class="text-sky-400">512 GB</span></h1>
-    <p class="text-slate-400 mt-2">Jämför priser hos svenska återförsäljare och operatörer. Klicka på en kolumnrubrik för att sortera.</p>
+    <p class="text-slate-400 mt-2">Jämför priser hos svenska återförsäljare och operatörer. Klicka på en kolumnrubrik för att sortera. Vid prissortering visas alternativ utan pris alltid sist, oavsett sorteringsriktning.</p>
   </header>
 
   <!-- Best deal hero -->
@@ -109,8 +109,11 @@ let sortKey = "price", sortDir = 1;
 function renderPrices() {
   const body = document.getElementById("priceBody");
   const rows = [...prices].sort((a, b) => {
-    const av = a[sortKey] == null ? Infinity : a[sortKey];
-    const bv = b[sortKey] == null ? Infinity : b[sortKey];
+    const av = a[sortKey];
+    const bv = b[sortKey];
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;
+    if (bv == null) return -1;
     if (typeof av === "string") return sortDir * av.localeCompare(bv, "sv");
     return sortDir * (av - bv);
   });
