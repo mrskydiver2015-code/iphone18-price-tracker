@@ -6,10 +6,14 @@
 <title>iPhone 18 Pro Max 512 GB – Prisdashboard</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#111a2e', accent: '#38bdf8' } } } }
+tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#18243b', accent: '#38bdf8' } } } }
 </script>
 <style>
   body { background: #0b1220; }
+  .dashboard-card {
+    border: 1px solid #475569;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.25), inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
   th.sortable { cursor: pointer; user-select: none; }
   th.sortable:hover { color: #38bdf8; }
   .arrow { font-size: 0.75em; margin-left: 0.25rem; }
@@ -19,13 +23,13 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#111a2e'
 <div class="max-w-6xl mx-auto px-4 py-10">
 
   <header class="mb-8">
-    <p class="text-sky-400 text-sm font-semibold tracking-wide uppercase">Prisbevakning · uppdaterad 2 oktober 2026</p>
+    <p class="text-sky-400 text-sm font-semibold tracking-wide uppercase">Prisbevakning · v1.0.1 · uppdaterad 4 oktober 2026</p>
     <h1 class="text-4xl font-bold mt-2">iPhone 18 Pro Max <span class="text-sky-400">512 GB</span></h1>
     <p class="text-slate-400 mt-2">Jämför priser hos svenska återförsäljare och operatörer. Klicka på en kolumnrubrik för att sortera. Vid prissortering visas alternativ utan pris alltid sist, oavsett sorteringsriktning.</p>
   </header>
 
   <!-- Best deal hero -->
-  <div class="bg-gradient-to-r from-sky-600 to-blue-700 rounded-2xl p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
+  <div class="bg-gradient-to-r from-sky-600 to-blue-700 border border-sky-400/60 shadow-xl shadow-black/25 rounded-2xl p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
     <div>
       <p class="text-sky-100 text-sm uppercase tracking-wide font-semibold">Billigast just nu</p>
       <p class="text-3xl font-bold mt-1">Tele2 – 20 160 kr</p>
@@ -39,7 +43,7 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#111a2e'
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="kpiRow"></div>
 
   <!-- Price table -->
-  <section class="bg-card rounded-2xl p-6 mb-8 border border-slate-800">
+  <section class="dashboard-card bg-card rounded-2xl p-6 mb-8">
     <h2 class="text-xl font-bold mb-4">Prisjämförelse 512 GB</h2>
     <div class="overflow-x-auto">
       <table class="w-full text-left text-sm" id="priceTable">
@@ -58,7 +62,7 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#111a2e'
   </section>
 
   <!-- Subscription offers -->
-  <section class="bg-card rounded-2xl p-6 mb-8 border border-slate-800">
+  <section class="dashboard-card bg-card rounded-2xl p-6 mb-8">
     <h2 class="text-xl font-bold mb-4">Abonnemangserbjudanden</h2>
     <div class="overflow-x-auto">
       <table class="w-full text-left text-sm">
@@ -160,10 +164,10 @@ const kpis = [
   ["Bevakade alternativ", String(prices.length), "butiker & operatörer"],
 ];
 document.getElementById("kpiRow").innerHTML = kpis.map(k => `
-  <div class="bg-card rounded-2xl p-5 border border-slate-800">
-    <p class="text-slate-400 text-xs uppercase tracking-wide font-semibold">${k[0]}</p>
+  <div class="dashboard-card bg-card rounded-2xl p-5">
+    <p class="text-slate-300 text-xs uppercase tracking-wide font-semibold">${k[0]}</p>
     <p class="text-2xl font-bold mt-1 text-sky-300">${k[1]}</p>
-    <p class="text-slate-500 text-xs mt-1">${k[2]}</p>
+    <p class="text-slate-400 text-xs mt-1">${k[2]}</p>
   </div>`).join("");
 </script>
 </body>
