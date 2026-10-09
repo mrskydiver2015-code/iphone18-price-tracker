@@ -23,7 +23,7 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#18243b'
 <div class="max-w-6xl mx-auto px-4 py-10">
 
   <header class="mb-8">
-    <p class="text-sky-400 text-sm font-semibold tracking-wide uppercase">Prisbevakning · v1.0.1 · uppdaterad 4 oktober 2026</p>
+    <p class="text-sky-400 text-sm font-semibold tracking-wide uppercase">Prisbevakning · v1.0.2 · granskad 9 oktober 2026</p>
     <h1 class="text-4xl font-bold mt-2">iPhone 18 Pro Max <span class="text-sky-400">512 GB</span></h1>
     <p class="text-slate-400 mt-2">Jämför priser hos svenska återförsäljare och operatörer. Klicka på en kolumnrubrik för att sortera. Vid prissortering visas alternativ utan pris alltid sist, oavsett sorteringsriktning.</p>
   </header>
@@ -31,9 +31,9 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#18243b'
   <!-- Best deal hero -->
   <div class="bg-gradient-to-r from-sky-600 to-blue-700 border border-sky-400/60 shadow-xl shadow-black/25 rounded-2xl p-6 mb-8 flex flex-wrap items-center justify-between gap-4">
     <div>
-      <p class="text-sky-100 text-sm uppercase tracking-wide font-semibold">Billigast just nu</p>
+      <p class="text-sky-100 text-sm uppercase tracking-wide font-semibold">Lägsta dokumenterade enhetspris · ej återverifierat i dag</p>
       <p class="text-3xl font-bold mt-1">Tele2 – 20 160 kr</p>
-      <p class="text-sky-100 mt-1">Kampanj: spara 4 455 kr · Leverans 5–6 veckor</p>
+      <p class="text-sky-100 mt-1">Underlag 7 okt: kampanj, i lager och leverans 4–6 dagar. Pris, lager och abonnemangsvillkor ej återverifierade 9 okt.</p>
     </div>
     <a href="https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24"
        class="bg-white text-blue-800 font-semibold px-6 py-3 rounded-xl hover:bg-sky-100 transition">Till erbjudandet</a>
@@ -81,29 +81,53 @@ tailwind.config = { theme: { extend: { colors: { ink: '#0b1220', card: '#18243b'
   </section>
 
   <footer class="text-slate-500 text-sm">
-    <p>Priser i SEK inkl. moms, observerade 2 oktober 2026. Ditt nuvarande avtal: Tre 799 kr/mån (sista delbetalningen i oktober).</p>
+    <p>Priser i SEK inkl. moms. Granskning 9 oktober: Apple, Elgiganten och NetOnNet har återverifierade 512 GB-priser; övriga belopp är daterade historiska uppgifter. Abonnemang tillkommer till enhetspriser med abonnemang. Tele2s kampanjbesparing 4 455 kr avser operatörens jämförelsepris; skillnaden mot Apple är 1 335 kr. Tre enligt underlaget: 799 kr/mån, sista delbetalningen i oktober och avtalsdatum 1 november. Kostnad därefter och uppsägningstid ej kontrollerade.</p>
   </footer>
 </div>
 
 <script>
 const prices = [
-  { name: "Tele2", price: 20160, savings: 4455, note: "Kampanj · leverans 5–6 veckor", url: "https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24", best: true },
-  { name: "Power", price: 21489, savings: 0, note: "Leverans omkring 23 okt", url: null },
-  { name: "Elgiganten", price: 21490, savings: 0, note: "I lager", url: null },
-  { name: "NetOnNet", price: 21490, savings: 0, note: "Förhandsbokning", url: null },
-  { name: "Telia", price: 21495, savings: 0, note: "Leverans 4–5 veckor", url: "https://www.telia.se/mobiltelefoner/apple/apple-iphone-18-pro-max" },
-  { name: "Apple Store", price: 21495, savings: 0, note: "Referenspris", url: "https://www.apple.com/se/shop/buy-iphone/iphone-18-pro" },
-  { name: "Tre", price: 22080, savings: 0, note: "460 kr/mån × 48 mån", url: "https://www.tre.se/handla/mobiltelefoner/apple/iphone-18-pro-max" },
-  { name: "CDON (marketplace)", price: 24722, savings: 0, note: "Säljs av CS MEGASTORE", url: null },
-  { name: "Telenor", price: null, savings: 0, note: "Endast med abonnemang", url: "https://www.telenor.se/handla/mobiler/apple/iphone-18-pro-max/" },
-  { name: "Webhallen", price: null, savings: 0, note: "512 GB slut i lager", url: null },
+  { name: "Tele2", price: 20160, savings: 4455, note: "Underlag 7 okt: kampanj, i lager, lev. 4–6 dagar. Pris, lager och abonnemangskrav ej återverifierade 9 okt", url: "https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24", best: true },
+  { name: "Power", price: 21489, savings: 0, note: "Underlag 7 okt: ej i lager, förväntas 30 okt. Pris/lager ej återverifierade 9 okt", url: null },
+  { name: "Elgiganten", price: 21490, savings: 0, note: "Pris verifierat 9 okt (svart, 512 GB). Lager ej återverifierat; underlag 7 okt: i lager", url: "https://www.elgiganten.se/product/mobiler-tablets-smartklockor/mobiltelefon/apple-iphone-18-pro-max-smarttelefon-512gb-black/1141329" },
+  { name: "NetOnNet", price: 21490, savings: 0, note: "Verifierat 9 okt (svart, 512 GB): på väg/förhandsbokning, endast online", url: "https://www.netonnet.se/art/mobil-smartwatch/mobiltelefoner/iphone/apple-iphone-18-pro-max-512gb-black/1067935.9044/" },
+  { name: "Telia", price: 21495, savings: 0, note: "Underlag 7 okt: endast mobil 21 495 kr, lev. 4–5 veckor. 512 GB-pris/lager ej återverifierade 9 okt", url: "https://www.telia.se/mobiltelefoner/apple/apple-iphone-18-pro-max" },
+  { name: "Apple Store", price: 21495, savings: 0, note: "Pris verifierat 9 okt (svart, 512 GB). Underlag 7 okt: lev. 3–4 veckor; leverans ej återverifierad", url: "https://www.apple.com/se/shop/buy-iphone/iphone-18-pro" },
+  { name: "Tre", price: 22080, savings: 0, note: "Underlag 7 okt: 920 × 24 = 22 080 kr; lev. 3–4 veckor. 512 GB-pris/lager ej återverifierade 9 okt", url: "https://www.tre.se/handla/mobiltelefoner/apple/iphone-18-pro-max" },
+  { name: "CDON (marketplace)", price: 24722, savings: 0, note: "Underlag 2 okt: CS MEGASTORE. Pris/lager ej återverifierade 9 okt", url: null },
+  { name: "Telenor", price: 20520, savings: 0, note: "Underlag 7 okt: 855 × 24 = 20 520 kr med abonnemang; lev. v45–49 beroende på färg. Ej återverifierat 9 okt", url: "https://www.telenor.se/handla/mobiler/apple/iphone-18-pro-max/" },
+  { name: "Webhallen", price: 21490, savings: 0, note: "Underlag 7 okt: 21 490 kr, ej i lager. Pris/lager ej återverifierade 9 okt", url: null },
 ];
 
 const subs = [
-  { op: "Tele2", offer: "Kampanjpris 20 160 kr", saving: "4 455 kr", terms: "Leverans 5–6 veckor", url: "https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24" },
-  { op: "Telia", offer: "Obegränsad + 24 mån bindning", saving: "ca 4 695 kr", terms: "Min totalkostnad ca 25 776 kr", url: "https://www.telia.se/mobiltelefoner/apple/apple-iphone-18-pro-max" },
-  { op: "Telenor", offer: "50 kr/mån rabatt × 24 mån", saving: "1 200 kr", terms: "24 mån bindning", url: "https://www.telenor.se/handla/mobiler/apple/iphone-18-pro-max/" },
-  { op: "Tre", offer: "30 kr/mån rabatt × 48 mån", saving: "1 440 kr", terms: "På abonnemanget", url: "https://www.tre.se/handla/mobiltelefoner/apple/iphone-18-pro-max" },
+  {
+    "op": "Tele2",
+    "offer": "Underlag 7 okt: enhet 20 160 kr",
+    "saving": "4 455 kr enligt kampanjen (1 335 kr mot Apple)",
+    "terms": "Underlag 7 okt: i lager, lev. 4–6 dagar. Pris, lager, abonnemangskostnad och bindning ej återverifierade 9 okt",
+    "url": "https://www.tele2.se/mobiler/apple-iphone-18-pro-max/9514/0/SPECIAL_OFFER-62238/24"
+  },
+  {
+    "op": "Telia",
+    "offer": "Underlag 7 okt: endast mobil 21 495 kr; 20 GB-alternativ: uppgift 699 kr/mån × 24 (ord. 912)",
+    "saving": "Uppgift 213 kr/mån; prisdelarna ej återverifierade",
+    "terms": "Rättelse: tidigare effektivt enhetspris ca 14 400 kr avsåg 256 GB. 512 GB, enhet/abonnemang och totalpris ej återverifierade 9 okt",
+    "url": "https://www.telia.se/mobiltelefoner/apple/apple-iphone-18-pro-max"
+  },
+  {
+    "op": "Telenor",
+    "offer": "Underlag 7 okt: enhet 855 × 24 = 20 520 kr med abonnemang",
+    "saving": "Underlag 7 okt: 50 × 24 = 1 200 kr",
+    "terms": "Underlag 7 okt: min totalkostnad ca 29 191 kr, lev. v45–49 beroende på färg. Pris/lager/bindning ej återverifierade 9 okt",
+    "url": "https://www.telenor.se/handla/mobiler/apple/iphone-18-pro-max/"
+  },
+  {
+    "op": "Tre",
+    "offer": "Underlag 7 okt: enhet 920 × 24 = 22 080 kr (alternativ 460 × 48)",
+    "saving": "Verifierat 9 okt: 30 kr/mån i 48 mån på 6 GB-planen",
+    "terms": "Verifierat 9 okt: 6 GB 249 kr/mån, 24 mån abonnemangsbindning. 48 mån avser telefonbetalning. 512 GB-pris/lager och min total ej återverifierade",
+    "url": "https://www.tre.se/handla/mobiltelefoner/apple/iphone-18-pro-max"
+  }
 ];
 
 const fmt = n => n == null ? "–" : n.toLocaleString("sv-SE");
@@ -158,8 +182,8 @@ const minP = Math.min(...withPrice.map(p => p.price));
 const maxP = Math.max(...withPrice.map(p => p.price));
 const maxS = Math.max(...prices.map(p => p.savings));
 const kpis = [
-  ["Lägsta pris", fmt(minP) + " kr", "Tele2, kampanj"],
-  ["Största besparing", fmt(maxS) + " kr", "Tele2-kampanjen"],
+  ["Lägsta dokumenterade pris", fmt(minP) + " kr", "Tele2, underlag 7 okt"],
+  ["Dokumenterad kampanjbesparing", fmt(maxS) + " kr", "Tele2, ej återverifierad 9 okt"],
   ["Prisspridning", fmt(maxP - minP) + " kr", fmt(minP) + " – " + fmt(maxP) + " kr"],
   ["Bevakade alternativ", String(prices.length), "butiker & operatörer"],
 ];
